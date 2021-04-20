@@ -1,6 +1,6 @@
-package it.projecteat.finalproject.AppConfig;
+package it.projecteat.finalproject.Services;
 
-import it.projecteat.finalproject.Repositories.AppUserRepo;
+import it.projecteat.finalproject.Repositories.UserRepo;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -9,15 +9,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    private AppUserRepo appUserRepo;
+    private UserRepo userRepo;
 
-    public UserDetailsServiceImpl(AppUserRepo appUserRepo) {
-        this.appUserRepo = appUserRepo;
+    public UserDetailsServiceImpl(UserRepo userRepo) {
+        this.userRepo = userRepo;
     }
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        // todo throw if not exist
-        return appUserRepo.findByUsername(s).get();
+        return userRepo.findByUsername(s).get();
     }
+
 }

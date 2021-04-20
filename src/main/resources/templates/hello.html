@@ -6,7 +6,7 @@
 </head>
 <body>
 
-Hello <span th:text="${name}"/>
+Hello <span th:text="${user.username}"/></br>
 Your role:
 <table>
     <th:block th:each="auth : ${authorities}">
@@ -14,6 +14,12 @@ Your role:
             <td th:text="${auth}">...</td>
         </tr>
     </th:block>
-</table>
+</table></br>
+Imię:<span th:text="${user.userDetails.firstName}"/></br>
+Nazwisko:<span th:text="${user.userDetails.lastName}"/></br>
+Opis:<span th:text="${user.userDetails.description}"/></br></br>
+
+<a href="/edit">Edycja:</a>
+
 </body>
 </html>

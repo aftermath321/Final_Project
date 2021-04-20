@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Edit</h1>
+<form th:action="@{/edit}"  method="post">
+
+    <input type="hidden" th:field="*{user.id}" id="user.id" />
+    <input type="hidden" th:field="*{user.userDetails.id}" id="userDetailsId" />
+    Imię:<input name="firstName" th:field="*{user.userDetails.firstName}"/></br>
+    Nazwisko:<input  name="lastName" th:field="*{user.userDetails.lastName}"/></br>
+    Username:<input  name="Username" th:field="*{user.username}"/></br>
+    E-mail:<input  name="email" th:field="*{user.email}"/></br>
+    Password:<input type="password" name="password"/></br>
+    Opis:<input  name="description" th:field="*{user.userDetails.description}"/></br>
+<input type="submit" value="Update">
+</form>
+
+</table>
+</body>
+</html>

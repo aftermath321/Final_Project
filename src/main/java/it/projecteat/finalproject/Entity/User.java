@@ -6,10 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -18,13 +15,26 @@ public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
     private String username;
     private String password;
-    private String role;
+
+    private String role = "ROLE_USER";
+
     @ColumnDefault(value = "false")
     private boolean isEnabled;
+
+    public it.projecteat.finalproject.Entity.UserDetails getUserDetails() {
+        return userDetails;
+    }
+
+    public void setUserDetails(it.projecteat.finalproject.Entity.UserDetails userDetails) {
+        this.userDetails = userDetails;
+    }
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.MERGE)
+    private it.projecteat.finalproject.Entity.UserDetails userDetails;
 
     public String getEmail() {
         return email;
@@ -36,7 +46,7 @@ public class User implements UserDetails {
 
     private String email;
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
@@ -54,7 +64,7 @@ public class User implements UserDetails {
     }
 
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
