@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link th:href="@{css/style.css}" href="../../static/css/Style.css"
+          rel="stylesheet" type="text/css" media="screen"/>
+</head>
+<body>
+<h1><span th:text="${recipes.recipeName}"/></h1>
+
+<span th:text="${recipes.recipeDescription}"/><br/>
+<span th:text="${recipes.preparationTime}"/> Minutes <br/>
+Cusine:<span th:text="${recipes.cusine.name}"/><br/>
+<table>
+    <tr>Ingredients</tr>
+<tr th:each="ingredient : ${ingredients}">
+
+<td th:text="${ingredient.ingredientName}"/>
+
+</tr><br/>
+</table>
+Preparation:<br/>
+<span th:text="${recipes.preparation}"/><br/>
+
+<a th:href="@{recipes}">Back</a>
+<a th:href="@{addRecipe}">Back</a>
+</body>
+</html>

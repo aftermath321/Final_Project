@@ -1,9 +1,16 @@
 package it.projecteat.finalproject.Entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity(name = "User_details")
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 public class UserDetails {
 
     public long getId() {
@@ -24,14 +31,12 @@ public class UserDetails {
     @OneToOne
     private User user;
 
-    public UserDetails(String firstName, String lastName, String description, List<Recipe> recipes) {
+    public UserDetails(String firstName, String lastName, String description) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.description = description;
     }
 
-    public UserDetails() {
-    }
 
     public User getUser() {
         return user;

@@ -5,15 +5,19 @@ import it.projecteat.finalproject.Entity.User;
 import it.projecteat.finalproject.Repositories.UserRepo;
 import it.projecteat.finalproject.Repositories.TokenRepo;
 import it.projecteat.finalproject.Services.UserService;
+import lombok.AllArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import java.io.IOException;
 import java.security.Principal;
 import java.util.Collection;
 
 @Controller
+@AllArgsConstructor
 public class UserController {
 
     private UserService userService;
@@ -21,19 +25,9 @@ public class UserController {
     private UserRepo userRepo;
 
 
-
-    public UserController(UserService userService, TokenRepo tokenRepo, UserRepo userRepo) {
-
-        this.userService = userService;
-        this.tokenRepo = tokenRepo;
-        this.userRepo = userRepo;
-    }
-
     @GetMapping("/hello")
     public String hello(Principal principal, Model model) {
         User user = userRepo.findByUsername(principal.getName()).orElseThrow(RuntimeException::new);
-//        UserDetails userDetails = userService.readDetails (user.getId());
-//        model.addAttribute("userDetails", userDetails);
         model.addAttribute("user", user);
         Collection<? extends GrantedAuthority> authorities =  SecurityContextHolder.getContext().getAuthentication().getAuthorities();
         model.addAttribute("authorities", authorities);
@@ -43,18 +37,18 @@ public class UserController {
     @GetMapping("/edit")
     public String getEdit(Principal principal, Model model){
         User user = userRepo.findByUsername(principal.getName()).orElseThrow(RuntimeException::new);
-//        UserDetails userDetails = userService.readDetails (user.getId());
         model.addAttribute("user", user);
-//        model.addAttribute("userDetails", userDetails);
         return "user-details";
     }
 
     @PostMapping("/edit")
-    public String submitEdit(@ModelAttribute User user, Model model){
+    public String submitEdit(@ModelAttribute User user, Model model, RedirectAttributes redirAttrs){
         model.addAttribute("user", user);
-//        model.addAttribute("userDetails", userDetails);
         userService.updateUser(user);
-        return "user-details";
+        redirAttrs.addFlashAttribute("okay", "Details changed!");
+        return "redirect:/edit";
+//      Zabezpiecz przed already in use!!!
+//      Wylogowanie po zmienieniu loginu/pass!!!
     }
 
     @GetMapping("/sign-up")
@@ -64,9 +58,16 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public String register(User user) {
-        userService.addUser(user);
-        return "sign-up";
+    public String register(User user, RedirectAttributes redirAttrs)
+            throws IOException, IOException {
+        if (!userService.isEmailexists(user) || !userService.isUserNameExists(user)) {
+            userService.addUser(user);
+            redirAttrs.addFlashAttribute("success", "Please confirm your e-mail address");
+            return "redirect:/sign-up";
+        } else {
+            redirAttrs.addFlashAttribute("error", "Username or E-mail already in use!");
+            return "redirect:/sign-up";
+        }
     }
 
     @GetMapping("/token")
@@ -77,9 +78,21 @@ public class UserController {
         userRepo.save(user);
         return "hello";
     }
-    }
+
+
+}
 
 
 
 
 
+//        String schema = req.getScheme();
+//        String serverName = req.getServerName();
+//        int serverPort = req.getServerPort();
+//        String schemaPort;
+
+//        if (("http".equals(schema) && serverPort == 80) || ("https".equals(schema) && serverPort == 443)) {
+//            schemaPort = "";
+//        } else {
+//            schemaPort = ":" + serverPort;
+//        }

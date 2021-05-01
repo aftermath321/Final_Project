@@ -3,10 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link th:href="@{css/style.css}" href="../../static/css/Style.css"
+          rel="stylesheet" type="text/css" media="screen"/>
 </head>
 <body>
 
 Hello <span th:text="${user.username}"/></br>
+<input type="hidden" th:field="*{user.id}" id="user.id" />
+<input type="hidden" th:field="*{user.userDetails.id}" id="userDetailsId" />
 Your role:
 <table>
     <th:block th:each="auth : ${authorities}">
@@ -15,11 +19,14 @@ Your role:
         </tr>
     </th:block>
 </table></br>
-Imię:<span th:text="${user.userDetails.firstName}"/></br>
-Nazwisko:<span th:text="${user.userDetails.lastName}"/></br>
-Opis:<span th:text="${user.userDetails.description}"/></br></br>
+First Name:<span th:text="${user.userDetails.firstName}"/></br>
+Last Name:<span th:text="${user.userDetails.lastName}"/></br>
+Description:<span th:text="${user.userDetails.description}"/></br></br>
 
-<a href="/edit">Edycja:</a>
+<a href="/edit">Edit User details:</a><br/>
+<a href="/recipes">Recipes:</a><br/>
+<a href="/ingredients">Ingredients:</a><br/>
+
 
 </body>
 </html>

@@ -9,7 +9,6 @@ import it.projecteat.finalproject.Entity.User;
 import it.projecteat.finalproject.Repositories.TokenRepo;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import javax.mail.MessagingException;
 import java.util.UUID;
 
@@ -68,6 +67,7 @@ public class UserService {
         token.setUser(user);
         tokenRepo.save(token);
 
+
         String url = "http://localhost:8080/token?value=" + tokenValue;
 
         try {
@@ -76,4 +76,41 @@ public class UserService {
             e.printStackTrace();
         }
     }
+
+    public boolean isEmailexists(User user) {
+        if (userRepo.findUserByEmail(user.getEmail()).isEmpty()) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public boolean isUserNameExists(User user) {
+        if (userRepo.findByUsername(user.getUsername()).isEmpty()) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

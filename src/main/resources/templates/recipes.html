@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link th:href="@{css/style.css}" href="../../static/css/Style.css"
+          rel="stylesheet" type="text/css" media="screen"/>
+</head>
+
+<body>
+<h1>Przepisy</h1>
+
+<table class="tg">
+    <tr>
+        <td>#</td>
+        <td>Name</td>
+        <td>Preparation</td>
+        <td>Time</td>
+        <td>Description</td>
+        <td>Cusine</td>
+        <td></td>
+
+    </tr>
+<tr th:each="recipe: ${recipes}">
+    <td th:text="${recipe.id}"/>
+    <td th:text="${recipe.recipeName}"/>
+    <td th:text="${recipe.preparation}"/>
+    <td th:text="${recipe.preparationTime}"/>
+    <td th:text="${recipe.recipeDescription}"/>
+    <td th:text="${recipe.cusine.name}"/>
+    <td><a th:href="@{recipeDetails/{id}(id=${recipe.id})}">Details</a></td>
+</tr>
+</table>
+</body>
+</html>
+
+

@@ -1,0 +1,27 @@
+.tg{
+
+    border-color:black;
+    border-style:solid;
+    border-width:1px;
+    font-family:Arial, sans-serif;
+    font-size:14px;
+    overflow:hidden;
+    padding:10px 5px;
+    word-break:normal;
+}
+
+.alert alert-primary{
+
+    padding: 20px;
+    background-color: green;
+    color: white;
+    margin-bottom: 15px;
+
+}
+
+.alert alert-danger{
+    padding: 20px;
+    background-color: red;
+    color: white;
+    margin-bottom: 15px;
+}

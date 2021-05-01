@@ -1,7 +1,6 @@
 package it.projecteat.finalproject;
 
-import it.projecteat.finalproject.Entity.User;
-import it.projecteat.finalproject.Entity.UserDetails;
+import it.projecteat.finalproject.Entity.*;
 import it.projecteat.finalproject.Repositories.UserDetailsRepo;
 import it.projecteat.finalproject.Repositories.UserRepo;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

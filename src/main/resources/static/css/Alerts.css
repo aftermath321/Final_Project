@@ -1,0 +1,15 @@
+.alert alert-primary{
+
+    padding: 20px;
+    background-color: green;
+    color: white;
+    margin-bottom: 15px;
+
+}
+
+.alert alert-danger{
+    padding: 20px;
+    background-color: red;
+    color: white;
+    margin-bottom: 15px;
+}
