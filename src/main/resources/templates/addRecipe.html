@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:href="@{css/style.css}" href="../../static/css/Style.css"
+          rel="stylesheet" type="text/css" media="screen"/>
+</head>
+<body>
+<h1>Add Recipe</h1>
+<div class="alert alert-primary" role="alert" th:text="${success}" th:if="${success}"></div>
+<form th:action="@{/addRecipes}" method="post">
+    Name:<input type="text" name="recipeName"></br>
+    Preparation:<input type="text" name="preparation"></br>
+    Preparation time:<input type="number" name="preparationTime"></br>
+    Description:<input type="text" name="recipeDescription"></br>
+    Cusine:</br>
+    <tr th:each="cusines : ${cusine}">
+        <input type="checkbox" th:value="*{cusine}">
+        <label th:text="${cusines.name}"/>
+
+            </tr></br>
+    Ingredients:</br>
+    <table>
+    <tr th:each="ingredient: ${ingredients}">
+        <td><input type="checkbox" th:value="${ingredient.id}" th:text="${ingredient.ingredientName}" />
+        <label th:text="${ingredient.ingredientName}"/>
+        </td>
+    </tr>
+    </table>
+    </br>
+    <input type="submit" value="Add Recipe"/>
+</form>
+</body>
+</html>

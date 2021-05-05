@@ -14,6 +14,7 @@ import java.util.Set;
 @Data
 public class Recipes {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -32,6 +33,7 @@ public class Recipes {
     private String preparation;
 
     @ManyToOne
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     private Cusine cusine;
 
     public Cusine getCusine() {

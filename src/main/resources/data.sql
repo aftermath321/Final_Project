@@ -16,3 +16,5 @@ insert into recipe_ingredients values (1, 5);
 insert into recipe_ingredients values (2, 2);
 insert into recipe_ingredients values (2, 4);
 insert into recipe_ingredients values (2, 5);
+
+insert into cusine_recipes values (1, 1);

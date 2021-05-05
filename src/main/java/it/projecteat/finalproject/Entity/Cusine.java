@@ -1,5 +1,7 @@
 package it.projecteat.finalproject.Entity;
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -13,6 +15,7 @@ public class Cusine {
     private String name;
 
     @OneToMany
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     Set<Recipes> recipes;
 
     @Override
