@@ -1,13 +1,13 @@
-package it.projecteat.finalproject;
-
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
-
-@SpringBootTest
-class FinalprojectApplicationTests {
-
-    @Test
-    void contextLoads() {
-    }
-
-}
+//package it.projecteat.finalproject;
+//
+//import org.junit.jupiter.api.Test;
+//import org.springframework.boot.test.context.SpringBootTest;
+//
+//@SpringBootTest
+//class FinalprojectApplicationTests {
+//
+//    @Test
+//    void contextLoads() {
+//    }
+//
+//}

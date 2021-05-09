@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity(name = "Recipes")
@@ -24,16 +25,12 @@ public class Recipes {
     private String recipeDescription;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "recipe_ingredients",
-            joinColumns = @JoinColumn(name = "recipe_id"),
-            inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
-    @Cascade(org.hibernate.annotations.CascadeType.ALL)
-    private Set<Ingredients> ingredients;
+    Set<Ingredients> ingredients;
 
     private String preparation;
 
-    @ManyToOne
-    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @Cascade(org.hibernate.annotations.CascadeType.MERGE)
     private Cusine cusine;
 
     public Cusine getCusine() {
@@ -48,13 +45,6 @@ public class Recipes {
         this.cusine = cusine;
     }
 
-    public Set<Ingredients> getIngredients() {
-        return ingredients;
-    }
-
-    public void setIngredients(Set<Ingredients> ingredients) {
-        this.ingredients = ingredients;
-    }
 
     public int getId() {
         return id;
@@ -105,6 +95,14 @@ public class Recipes {
                 '}';
     }
 
+    public Set<Ingredients> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(Set<Ingredients> ingredients) {
+        this.ingredients = ingredients;
+    }
+
     public Recipes(String recipeName, int preparationTime, String recipeDescription, Set<Ingredients> ingredients, String preparation, Cusine cusine) {
         this.recipeName = recipeName;
         this.preparationTime = preparationTime;
@@ -113,4 +111,5 @@ public class Recipes {
         this.preparation = preparation;
         this.cusine = cusine;
     }
+
 }

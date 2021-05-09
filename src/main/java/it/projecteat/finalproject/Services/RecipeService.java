@@ -10,6 +10,7 @@ import it.projecteat.finalproject.Repositories.RecipeRepo;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class RecipeService {
     private RecipeRepo recipeRepo;
     private IngredientsRepo ingredientsRepo;
     private CusineRepo cusineRepo;
-
+    EntityManager entityManager;
 
     public void addRecipe (Recipes recipe){
         recipe.setRecipeName(recipe.getRecipeName());
@@ -33,10 +34,19 @@ public class RecipeService {
 //        ingredientsRepo.save(ingredients);
 //        cusineRepo.save(cusine);
         recipeRepo.save(recipe);
+//        entityManager.persist(recipe);
     }
 
     public List<Recipes> showList (){
         return recipeRepo.findAll();
+    }
+
+    public Recipes findById(int id){
+       return recipeRepo.findById(id).get();
+    }
+
+    public List<Cusine> findAllCusine(){
+        return cusineRepo.findAll();
     }
 
 
