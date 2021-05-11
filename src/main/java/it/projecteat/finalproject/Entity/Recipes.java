@@ -25,6 +25,7 @@ public class Recipes {
     private String recipeDescription;
 
     @ManyToMany(fetch = FetchType.EAGER)
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     Set<Ingredients> ingredients;
 
     private String preparation;
@@ -44,7 +45,6 @@ public class Recipes {
     public void setCusine(Cusine cusine) {
         this.cusine = cusine;
     }
-
 
     public int getId() {
         return id;

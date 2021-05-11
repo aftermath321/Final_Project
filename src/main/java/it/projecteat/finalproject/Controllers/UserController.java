@@ -6,12 +6,17 @@ import it.projecteat.finalproject.Repositories.UserRepo;
 import it.projecteat.finalproject.Repositories.TokenRepo;
 import it.projecteat.finalproject.Services.UserService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.Collection;
@@ -24,7 +29,6 @@ public class UserController {
     private TokenRepo tokenRepo;
     private UserRepo userRepo;
 
-
     @GetMapping("/hello")
     public String hello(Principal principal, Model model) {
         User user = userRepo.findByUsername(principal.getName()).orElseThrow(RuntimeException::new);
@@ -32,6 +36,11 @@ public class UserController {
         Collection<? extends GrantedAuthority> authorities =  SecurityContextHolder.getContext().getAuthentication().getAuthorities();
         model.addAttribute("authorities", authorities);
         return "hello";
+    }
+
+    @GetMapping("/index")
+    public String homePage() {
+        return "index";
     }
 
     @GetMapping("/edit")
@@ -46,9 +55,8 @@ public class UserController {
         model.addAttribute("user", user);
         userService.updateUser(user);
         redirAttrs.addFlashAttribute("okay", "Details changed!");
-        return "redirect:/edit";
+        return "redirect:/logout";
 //      Zabezpiecz przed already in use!!!
-//      Wylogowanie po zmienieniu loginu/pass!!!
     }
 
     @GetMapping("/sign-up")
@@ -56,6 +64,7 @@ public class UserController {
         model.addAttribute("user", new User());
         return "sign-up";
     }
+
 
     @PostMapping("/register")
     public String register(User user, RedirectAttributes redirAttrs)
@@ -76,23 +85,7 @@ public class UserController {
         User user = byValue.getUser();
         user.setEnabled(true);
         userRepo.save(user);
-        return "hello";
+        return "index";
     }
-
-
 }
 
-
-
-
-
-//        String schema = req.getScheme();
-//        String serverName = req.getServerName();
-//        int serverPort = req.getServerPort();
-//        String schemaPort;
-
-//        if (("http".equals(schema) && serverPort == 80) || ("https".equals(schema) && serverPort == 443)) {
-//            schemaPort = "";
-//        } else {
-//            schemaPort = ":" + serverPort;
-//        }

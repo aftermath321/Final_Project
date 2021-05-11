@@ -24,16 +24,14 @@
             <option th:each="cusine: ${cusines}" th:value="${cusine.id}" th:text="${cusine.name}"></option>
         </select>
     </br>
+    Ingredients:<br/>
     <table>
         <tr>
-            <td>Ingredients:</td>
-            <td>
                 <th:block th:each="ingredient : ${ingredients}" th:field="*{ingredients.id}">
-                    <input type="checkbox" th:value="${ingredient.id}" th:name="ingredients.id"/>
+                    <input type="checkbox" th:value="${ingredient.id}" th:name="ingredients"/>
                     <label th:text="${ingredient.ingredientName}"></label>
                 </th:block>
-            </td>
-        </tr>
+                    </tr>
     </table>
     </br>
     <input type="submit" value="Add Recipe"/>

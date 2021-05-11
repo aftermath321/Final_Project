@@ -1,15 +1,12 @@
 package it.projecteat.finalproject.Services;
 
-
 import it.projecteat.finalproject.Entity.Cusine;
-import it.projecteat.finalproject.Entity.Ingredients;
 import it.projecteat.finalproject.Entity.Recipes;
 import it.projecteat.finalproject.Repositories.CusineRepo;
 import it.projecteat.finalproject.Repositories.IngredientsRepo;
 import it.projecteat.finalproject.Repositories.RecipeRepo;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 import java.util.List;
@@ -49,9 +46,9 @@ public class RecipeService {
         return cusineRepo.findAll();
     }
 
+    public List<Recipes> findByName(String name){
+        return recipeRepo.findByRecipeNameContaining(name);
+    }
 
-//    public List<Ingredients> showIngredients(Integer id){
-//        List<Ingredients> list = ingredientsRepo.findByRecipeId(id);
-//        return list;
-//    }
+
 }

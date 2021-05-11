@@ -9,6 +9,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity(name = "Ingredients")
+@NoArgsConstructor
 public class Ingredients {
 
     @Id
@@ -19,7 +20,9 @@ public class Ingredients {
     private int kcal;
 
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "ingredients")
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     Set<Recipes> recipes;
+
 
     public int getId() {
         return id;
@@ -50,12 +53,10 @@ public class Ingredients {
                 '}';
     }
 
-    public Ingredients() {
-    }
-
-    public Ingredients(String ingredientName, int kcal) {
-        this.ingredientName = ingredientName;
+    public Ingredients(int id, String ingredientName, int kcal) {
+        this.id = id;
         this.kcal = kcal;
+        this.ingredientName = ingredientName;
     }
 
     public void setId(int id) {

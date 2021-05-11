@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.io.IOException;
 import java.util.Set;
@@ -28,14 +29,6 @@ public class RecipeController {
         return "recipes";
     }
 
-    @GetMapping("/recipeDetails/{id}")
-    public String recipeDetails (Model model, @PathVariable Integer id){
-        model.addAttribute("recipes", recipeService.findById(id));
-        Set<Ingredients> ingredients =  ingredientsService.showByRecipe(recipeService.findById(id));
-        model.addAttribute("ingredients", ingredients);
-        return "recipeDetails";
-    }
-
     @GetMapping("/addRecipe")
     public String addRecipe (Model model){
         model.addAttribute("recipe", new Recipes());
@@ -50,5 +43,35 @@ public class RecipeController {
         recipeService.addRecipe(recipes);
         redirAttrs.addFlashAttribute("success", "Recipe added");
         return "redirect:/addRecipe";
+    }
+
+    @GetMapping("/recipeDetails/{id}")
+    public String recipeDetails (Model model, @PathVariable Integer id){
+        model.addAttribute("recipes", recipeService.findById(id));
+        Set<Ingredients> ingredients =  ingredientsService.showByRecipe(recipeService.findById(id));
+        model.addAttribute("ingredients", ingredients);
+        return "recipeDetails";
+    }
+
+    @GetMapping("/search")
+    public String getSearch (){
+        return "search";
+    }
+
+    @PostMapping("/search")
+    public String postSearch (@RequestParam int id,@RequestParam String phrase, Model model){
+        switch (id){
+            case 1:
+                model.addAttribute("resultsI", ingredientsService.findByName(phrase));
+            case 2:
+                model.addAttribute("resultsR", recipeService.findByName(phrase));
+        }
+        return "results";
+    }
+
+    @GetMapping("/results/")
+    public String results (@RequestParam int id,@RequestParam String phrase, Model model){
+
+        return "results";
     }
 }

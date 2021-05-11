@@ -1,17 +1,13 @@
 package it.projecteat.finalproject.Services;
 
-
 import it.projecteat.finalproject.Entity.Ingredients;
 import it.projecteat.finalproject.Entity.Recipes;
-import it.projecteat.finalproject.Entity.User;
 import it.projecteat.finalproject.Repositories.IngredientsRepo;
 import lombok.AllArgsConstructor;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.stereotype.Service;
-
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -22,12 +18,12 @@ import java.util.stream.Collectors;
 public class IngredientsService {
 
 
-    private IngredientsRepo ingredientsRepo;
+    final private IngredientsRepo ingredientsRepo;
     EntityManager entityManager;
 
     private void saveIngredient (Ingredients ingredients){
         ingredients.setIngredientName(ingredients.getIngredientName());
-        ingredients.setKcal(ingredients.getKcal());
+//        ingredients.setKcal(ingredients.getKcal());
         ingredientsRepo.save(ingredients);
     }
 
@@ -41,13 +37,12 @@ public class IngredientsService {
     }
 
     public Set<Ingredients> allShow(){
-        Set<Ingredients> set = ingredientsRepo.findAll().stream().collect(Collectors.toSet());
-        return set;
+        return ingredientsRepo.findAll().stream().collect(Collectors.toSet());
     }
 
     public void saveIngredients (Ingredients ingredients){
         ingredients.setIngredientName(ingredients.getIngredientName());
-        ingredients.setKcal(ingredients.getKcal());
+//        ingredients.setKcal(ingredients.getKcal());
         ingredientsRepo.save(ingredients);
     }
 
@@ -59,6 +54,8 @@ public class IngredientsService {
         }
     }
 
-
+    public List<Ingredients> findByName(String name){
+        return ingredientsRepo.findByIngredientNameContaining(name);
+    }
 
 }
