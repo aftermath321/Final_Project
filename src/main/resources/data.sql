@@ -1,5 +1,10 @@
-insert into cusine values (1, 'wloska');
-insert into cusine values (2, 'tajska');
+insert into cusine values (1, 'Italian');
+insert into cusine values (2, 'South East Asian');
+insert into cusine values (3, 'Mexican');
+insert into cusine values (4, 'Indian');
+insert into cusine values (5, 'Japanese');
+insert into cusine values (6, 'American');
+
 insert into recipes values (1, 'zrob cos', 15, 'smaczna', 'przepis', 1);
 insert into recipes values (2,'przygotowanie', 15,'jakis tam opis', 'pad thai', 2);
 

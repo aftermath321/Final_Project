@@ -23,10 +23,9 @@ First Name:<span th:text="${user.userDetails.firstName}"/></br>
 Last Name:<span th:text="${user.userDetails.lastName}"/></br>
 Description:<span th:text="${user.userDetails.description}"/></br></br>
 
-<a href="/edit">Edit User details:</a><br/>
-<a href="/index">Home Page:</a><br/>
 
-
+<a th:href="@{edit}">Edit User details</a>
+<a th:href="@{index}">Back</a>
 
 </body>
 </html>

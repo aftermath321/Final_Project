@@ -21,40 +21,30 @@ public class IngredientsService {
     final private IngredientsRepo ingredientsRepo;
     EntityManager entityManager;
 
-    private void saveIngredient (Ingredients ingredients){
-        ingredients.setIngredientName(ingredients.getIngredientName());
-//        ingredients.setKcal(ingredients.getKcal());
-        ingredientsRepo.save(ingredients);
-    }
-
     @EntityGraph("recipes")
-    public Set<Ingredients> showByRecipe(Recipes recipes){
+    public Set<Ingredients> showByRecipe(Recipes recipes) {
         return ingredientsRepo.findAllByRecipes(recipes);
     }
 
-    public List<Ingredients> showAll(){
+    public List<Ingredients> showAll() {
         return ingredientsRepo.findAll();
     }
 
-    public Set<Ingredients> allShow(){
+    public Set<Ingredients> allShow() {
         return ingredientsRepo.findAll().stream().collect(Collectors.toSet());
     }
 
-    public void saveIngredients (Ingredients ingredients){
+    public void saveIngredients(Ingredients ingredients) {
         ingredients.setIngredientName(ingredients.getIngredientName());
-//        ingredients.setKcal(ingredients.getKcal());
+        ingredients.setKcal(ingredients.getKcal());
         ingredientsRepo.save(ingredients);
     }
 
-    public boolean ingredientExists (Ingredients ingredients){
-        if (ingredientsRepo.findByIngredientName(ingredients.getIngredientName()).isEmpty()){
-            return false;
-        }else {
-            return true;
-        }
+    public boolean ingredientExists(Ingredients ingredients) {
+        return ingredientsRepo.findByIngredientName(ingredients.getIngredientName()).isPresent();
     }
 
-    public List<Ingredients> findByName(String name){
+    public List<Ingredients> findByName(String name) {
         return ingredientsRepo.findByIngredientNameContaining(name);
     }
 

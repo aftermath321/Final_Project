@@ -70,7 +70,7 @@ public class RecipeController {
     }
 
     @GetMapping("/results/")
-    public String results (@RequestParam int id,@RequestParam String phrase, Model model){
+    public String results (){
 
         return "results";
     }

@@ -4,14 +4,12 @@ import it.projecteat.finalproject.Entity.*;
 import it.projecteat.finalproject.Repositories.UserDetailsRepo;
 import it.projecteat.finalproject.Repositories.UserRepo;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootApplication
 class Start {
 
     public Start(UserRepo userRepo, PasswordEncoder passwordEncoder, UserDetailsRepo userDetailsRepo) {
-
 
         User userJ = new User();
         UserDetails userJD = new UserDetails();

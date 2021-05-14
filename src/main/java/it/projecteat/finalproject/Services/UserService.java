@@ -10,16 +10,17 @@ import it.projecteat.finalproject.Repositories.TokenRepo;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import javax.mail.MessagingException;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
 public class UserService {
 
-    private UserRepo userRepo;
-    private PasswordEncoder passwordEncoder;
-    private TokenRepo tokenRepo;
-    private MailService mailService;
-    private UserDetailsRepo userDetailsRepo;
+    private final UserRepo userRepo;
+    private final PasswordEncoder passwordEncoder;
+    private final TokenRepo tokenRepo;
+    private final MailService mailService;
+    private final UserDetailsRepo userDetailsRepo;
 
 
     public UserService(UserRepo userRepo, PasswordEncoder passwordEncoder, TokenRepo tokenRepo, MailService mailService, UserDetailsRepo userDetailsRepo) {
@@ -46,19 +47,17 @@ public class UserService {
         user.setUsername(user.getUsername());
         user.setEnabled(true);
         user.setRole(user.getRole());
-//        userDetails.setDescription(userDetails.getDescription());
-//        userDetails.setFirstName(userDetails.getFirstName());
-//        userDetails.setLastName(userDetails.getLastName());
         user.getUserDetails().setUser(user);
         userRepo.save(user);
-//        userDetailsRepo.save(userDetails);
+    }
+    public Optional<User> findByUsername(String username){
+        return userRepo.findByUsername(username);
     }
 
+    public void simpleSave (User user){
+        userRepo.save(user);
+    }
 
-//    public UserDetails readDetails (int id){
-//        UserDetails userDetails = userDetailsRepo.findByUser_Id(id);
-//        return userDetails;
-//    }
 
     public void sendToken(User user) {
         String tokenValue = UUID.randomUUID().toString();
@@ -78,23 +77,16 @@ public class UserService {
     }
 
     public boolean isEmailexists(User user) {
-        if (userRepo.findUserByEmail(user.getEmail()).isEmpty()) {
-            return false;
-        } else {
-            return true;
-        }
+        return userRepo.findUserByEmail(user.getEmail()).isPresent();
     }
 
     public boolean isUserNameExists(User user) {
-        if (userRepo.findByUsername(user.getUsername()).isEmpty()) {
-            return false;
-        } else {
-            return true;
-        }
+        return userRepo.findByUsername(user.getUsername()).isPresent();
     }
 
-
-
+    public Token findToken (String value){
+        return tokenRepo.findByValue(value);
+    }
 
 
 

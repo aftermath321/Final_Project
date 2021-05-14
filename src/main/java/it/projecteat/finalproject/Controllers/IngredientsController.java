@@ -5,25 +5,24 @@ import it.projecteat.finalproject.Entity.Recipes;
 import it.projecteat.finalproject.Services.IngredientsService;
 import it.projecteat.finalproject.Services.RecipeService;
 import lombok.AllArgsConstructor;
-import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import java.io.IOException;
-import java.security.Principal;
+import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 @Controller
 @AllArgsConstructor
 public class IngredientsController {
 
-    private IngredientsService ingredientsService;
-    private RecipeService recipeService;
+    private final IngredientsService ingredientsService;
+    private final RecipeService recipeService;
 
     @GetMapping("/ingredients")
     public String recipes(Model model) {
@@ -38,7 +37,7 @@ public class IngredientsController {
     }
 
     @PostMapping("/addIngredients")
-    public String addIngredient(Ingredients ingredient, RedirectAttributes redirAttrs) throws IOException, IOException {
+    public String addIngredient(Ingredients ingredient, RedirectAttributes redirAttrs) throws IOException {
         if (!ingredientsService.ingredientExists(ingredient)) {
             ingredientsService.saveIngredients(ingredient);
             redirAttrs.addFlashAttribute("success", "Ingredient added");

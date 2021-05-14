@@ -16,9 +16,9 @@ import java.util.List;
 @Transactional
 public class RecipeService {
 
-    private RecipeRepo recipeRepo;
-    private IngredientsRepo ingredientsRepo;
-    private CusineRepo cusineRepo;
+    private final RecipeRepo recipeRepo;
+    private final IngredientsRepo ingredientsRepo;
+    private final CusineRepo cusineRepo;
     EntityManager entityManager;
 
     public void addRecipe (Recipes recipe){

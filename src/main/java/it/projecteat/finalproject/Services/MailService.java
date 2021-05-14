@@ -12,7 +12,7 @@ import javax.mail.internet.MimeMessage;
 public class MailService {
 
 
-    private JavaMailSender javaMailSender;
+    private final JavaMailSender javaMailSender;
 
     @Autowired
     public MailService(JavaMailSender javaMailSender) {
