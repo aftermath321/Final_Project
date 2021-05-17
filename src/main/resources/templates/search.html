@@ -2,19 +2,23 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:form="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>search</title>
 </head>
 <body>
 <h1>Search</h1>
+
 <form method="post" th:action="@{/search}">
 
- Search for:   <input type="text" th:name="phrase">
+    Search for: <input type="text" th:name="phrase">
     <select th:name="id">
         <option value="1">Ingredient</option>
         <option value="2">Recipe</option>
+        <option value="3">Both</option>
     </select>
     <input type="submit" value="Search">
 </form>
+
 <a th:href="@{index}">Back</a>
+
 </body>
 </html>

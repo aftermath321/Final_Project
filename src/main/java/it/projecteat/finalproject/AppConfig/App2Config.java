@@ -11,5 +11,6 @@ public class App2Config implements WebMvcConfigurer {
     @Override
     public void addFormatters(FormatterRegistry registry) {
         registry.addConverter(new StringToIngredientConverter());
+
     }
 }

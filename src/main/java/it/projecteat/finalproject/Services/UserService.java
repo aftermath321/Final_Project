@@ -29,6 +29,7 @@ public class UserService {
         this.tokenRepo = tokenRepo;
         this.mailService = mailService;
         this.userDetailsRepo = userDetailsRepo;
+
     }
 
 
@@ -39,9 +40,10 @@ public class UserService {
         userRepo.save(user);
         userDetailsRepo.save(userDetails);
         sendToken(user);
+
     }
 
-    public void updateUser(User user){
+    public void updateUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setEmail(user.getEmail());
         user.setUsername(user.getUsername());
@@ -49,13 +51,17 @@ public class UserService {
         user.setRole(user.getRole());
         user.getUserDetails().setUser(user);
         userRepo.save(user);
-    }
-    public Optional<User> findByUsername(String username){
-        return userRepo.findByUsername(username);
+
     }
 
-    public void simpleSave (User user){
+    public Optional<User> findByUsername(String username) {
+        return userRepo.findByUsername(username);
+
+    }
+
+    public void simpleSave(User user) {
         userRepo.save(user);
+
     }
 
 
@@ -74,35 +80,22 @@ public class UserService {
         } catch (MessagingException e) {
             e.printStackTrace();
         }
+
     }
 
     public boolean isEmailexists(User user) {
         return userRepo.findUserByEmail(user.getEmail()).isPresent();
+
     }
 
     public boolean isUserNameExists(User user) {
         return userRepo.findByUsername(user.getUsername()).isPresent();
+
     }
 
-    public Token findToken (String value){
+    public Token findToken(String value) {
         return tokenRepo.findByValue(value);
+
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

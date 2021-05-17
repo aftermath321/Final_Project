@@ -2,34 +2,41 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>results</title>
 </head>
 <body>
+
 <h1>Results</h1>
-<table th:each="result : ${resultsR}">
+
+<table>
+    Recipes results:
     <tr>
         <td>#</td>
         <td>Name</td>
         <td>Link</td>
     </tr>
-    <tr>
-        <td th:text="${result.id}" />
-        <td th:text="${result.recipeName}" />
+    <tr th:each="result : ${resultsR}">
+        <td th:text="${result.id}"/>
+        <td th:text="${result.recipeName}"/>
         <td><a th:href="@{recipeDetails/{id}(id=${result.id})}">Details</a></td>
     </tr>
 </table>
-<table th:each="result : ${resultsI}">
+<br/>
+<table>
+    Ingredients results:
     <tr>
         <td>#</td>
         <td>Name</td>
         <td>Kcal</td>
     </tr>
-    <tr>
-        <td th:text="${result.id}" />
-        <td th:text="${result.ingredientName}" />
-        <td th:text="${result.kcal}" />
+    <tr th:each="result : ${resultsI}">
+        <td th:text="${result.id}"/>
+        <td th:text="${result.ingredientName}"/>
+        <td th:text="${result.kcal}"/>
     </tr>
 </table>
+
 <a th:href="@{index}">Back</a>
+
 </body>
 </html>

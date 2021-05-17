@@ -1,25 +1,15 @@
 package it.projecteat.finalproject.Entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
+import lombok.*;
 import javax.persistence.*;
-import java.util.List;
 
 @Entity(name = "User_details")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Getter
+@Setter
 public class UserDetails {
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,45 +21,6 @@ public class UserDetails {
     @OneToOne
     private User user;
 
-    public UserDetails(String firstName, String lastName, String description) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.description = description;
-    }
-
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     @Override
     public String toString() {
         return "UserDetails{" +
@@ -79,5 +30,6 @@ public class UserDetails {
                 ", description='" + description + '\'' +
                 ", user=" + user +
                 '}';
+
     }
 }

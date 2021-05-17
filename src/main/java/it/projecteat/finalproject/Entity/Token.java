@@ -1,8 +1,12 @@
 package it.projecteat.finalproject.Entity;
 
+import lombok.Getter;
+import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
+@Getter
+@Setter
 public class Token {
 
     @Id
@@ -14,27 +18,4 @@ public class Token {
     @OneToOne
     private User user;
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 }

@@ -24,54 +24,62 @@ public class RecipeController {
     IngredientsService ingredientsService;
 
     @GetMapping("/recipes")
-    public String recipes (Model model){
+    public String recipes(Model model) {
         model.addAttribute("recipes", recipeService.showList());
         return "recipes";
+
     }
 
     @GetMapping("/addRecipe")
-    public String addRecipe (Model model){
+    public String addRecipe(Model model) {
         model.addAttribute("recipe", new Recipes());
-        Set<Ingredients> ingredients =  ingredientsService.allShow();
+        Set<Ingredients> ingredients = ingredientsService.allShow();
         model.addAttribute("ingredients", ingredients);
         model.addAttribute("cusines", recipeService.findAllCusine());
         return "addRecipe";
+
     }
 
     @PostMapping("/addRecipes")
-    public String addRecipes (Recipes recipes, RedirectAttributes redirAttrs) throws IOException {
+    public String addRecipes(Recipes recipes, RedirectAttributes redirAttrs) throws IOException {
         recipeService.addRecipe(recipes);
         redirAttrs.addFlashAttribute("success", "Recipe added");
         return "redirect:/addRecipe";
+
     }
 
     @GetMapping("/recipeDetails/{id}")
-    public String recipeDetails (Model model, @PathVariable Integer id){
+    public String recipeDetails(Model model, @PathVariable Integer id) {
         model.addAttribute("recipes", recipeService.findById(id));
-        Set<Ingredients> ingredients =  ingredientsService.showByRecipe(recipeService.findById(id));
+        Set<Ingredients> ingredients = ingredientsService.showByRecipe(recipeService.findById(id));
         model.addAttribute("ingredients", ingredients);
         return "recipeDetails";
+
     }
 
     @GetMapping("/search")
-    public String getSearch (){
+    public String getSearch() {
         return "search";
+
     }
 
     @PostMapping("/search")
-    public String postSearch (@RequestParam int id,@RequestParam String phrase, Model model){
-        switch (id){
-            case 1:
-                model.addAttribute("resultsI", ingredientsService.findByName(phrase));
-            case 2:
-                model.addAttribute("resultsR", recipeService.findByName(phrase));
+    public String postSearch(@RequestParam int id, @RequestParam String phrase, Model model) {
+        if (id == 1) {
+            model.addAttribute("resultsI", ingredientsService.findByName(phrase));
+        } else if (id == 2){
+            model.addAttribute("resultsR", recipeService.findByName(phrase));
+        } else {
+            model.addAttribute("resultsI", ingredientsService.findByName(phrase));
+            model.addAttribute("resultsR", recipeService.findByName(phrase));
         }
         return "results";
+
     }
 
     @GetMapping("/results/")
-    public String results (){
-
+    public String results() {
         return "results";
+
     }
 }

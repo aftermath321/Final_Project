@@ -10,6 +10,7 @@ public interface RecipeRepo extends JpaRepository<Recipes, Long> {
 
 
     Optional<Recipes> findById(Integer id);
-    List<Recipes> findByRecipeNameContaining (@Param("name") String name);
+
+    List<Recipes> findByRecipeNameContaining(@Param("name") String name);
 
 }

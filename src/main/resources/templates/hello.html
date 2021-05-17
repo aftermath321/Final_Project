@@ -2,15 +2,15 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>hello</title>
     <link th:href="@{css/style.css}" href="../../static/css/Style.css"
           rel="stylesheet" type="text/css" media="screen"/>
 </head>
 <body>
 
 Hello <span th:text="${user.username}"/></br>
-<input type="hidden" th:field="*{user.id}" id="user.id" />
-<input type="hidden" th:field="*{user.userDetails.id}" id="userDetailsId" />
+<input type="hidden" th:field="*{user.id}" id="user.id"/>
+<input type="hidden" th:field="*{user.userDetails.id}" id="userDetailsId"/>
 Your role:
 <table>
     <th:block th:each="auth : ${authorities}">
@@ -18,7 +18,8 @@ Your role:
             <td th:text="${auth}">...</td>
         </tr>
     </th:block>
-</table></br>
+</table>
+</br>
 First Name:<span th:text="${user.userDetails.firstName}"/></br>
 Last Name:<span th:text="${user.userDetails.lastName}"/></br>
 Description:<span th:text="${user.userDetails.description}"/></br></br>

@@ -1,12 +1,17 @@
 package it.projecteat.finalproject.Entity;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.Cascade;
-
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity(name="Cusine")
+@Entity(name = "Cusine")
+@Getter
+@Setter
+@NoArgsConstructor
 public class Cusine {
 
     @Id
@@ -26,37 +31,14 @@ public class Cusine {
                 ", name='" + name + '\'' +
                 ", recipes=" + recipes +
                 '}';
+
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public Cusine(String name, Set<Recipes> recipes) {
         this.name = name;
         this.recipes = recipes;
+
     }
 
-    public Cusine() {
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Set<Recipes> getRecipes() {
-        return recipes;
-    }
-
-    public void setRecipes(Set<Recipes> recipes) {
-        this.recipes = recipes;
-    }
 }

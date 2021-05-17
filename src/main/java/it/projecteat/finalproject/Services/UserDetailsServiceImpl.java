@@ -13,11 +13,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     public UserDetailsServiceImpl(UserRepo userRepo) {
         this.userRepo = userRepo;
+
     }
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         return userRepo.findByUsername(s).get();
+
     }
 
 }

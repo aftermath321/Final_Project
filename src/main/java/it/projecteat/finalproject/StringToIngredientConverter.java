@@ -10,7 +10,8 @@ public class StringToIngredientConverter implements Converter<String, Ingredient
 
     @Override
     public Ingredients convert(String s) {
-    return new Ingredients(Integer.parseInt(s), "", 1);
+        return new Ingredients(Integer.parseInt(s), "", 1);
 //    coconut
     }
 }
+

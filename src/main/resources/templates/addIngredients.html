@@ -2,23 +2,26 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>addIngredients</title>
     <link th:href="@{css/style.css}" href="../../static/css/Style.css"
           rel="stylesheet" type="text/css" media="screen"/>
 </head>
 <body>
-    <h1>Add ingredient</h1>
-    <div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
-    <div class="alert alert-primary" role="alert" th:text="${success}" th:if="${success}"></div>
-    <form th:action="@{/addIngredients}" method="post">
-        Name:
-        <input type="text" name="ingredientName">
-        Kcal:
-        <input type="number" name="kcal">
 
-        <input type="submit" value="Add">
+<h1>Add ingredient</h1>
+<div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
+<div class="alert alert-primary" role="alert" th:text="${success}" th:if="${success}"></div>
+<form th:action="@{/addIngredients}" method="post">
+    Name:
+    <input type="text" name="ingredientName">
+    Kcal:
+    <input type="number" name="kcal">
 
-    </form>
-    <a th:href="@{ingredients}">Back</a>
+    <input type="submit" value="Add">
+
+</form>
+
+<a th:href="@{ingredients}">Back</a>
+
 </body>
 </html>

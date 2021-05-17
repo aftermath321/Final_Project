@@ -10,8 +10,10 @@ import java.util.Set;
 
 public interface IngredientsRepo extends JpaRepository<Ingredients, Long> {
 
-    Optional<Ingredients> findByIngredientName (String ingredient);
-    Set<Ingredients> findAllByRecipes (Recipes recipes);
-    List <Ingredients> findByIngredientNameContaining (@Param("name") String name);
+    Optional<Ingredients> findByIngredientName(String ingredient);
+
+    Set<Ingredients> findAllByRecipes(Recipes recipes);
+
+    List<Ingredients> findByIngredientNameContaining(@Param("name") String name);
 
 }

@@ -3,16 +3,17 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>addRecipe</title>
     <link th:href="@{css/style.css}" href="../../static/css/Style.css"
           rel="stylesheet" type="text/css" media="screen"/>
 </head>
 <body>
+
 <h1>Add Recipe</h1>
 
 <div class="alert alert-primary" role="alert" th:text="${success}" th:if="${success}"></div>
 
-<form th:action="@{/addRecipes}" method="post" th:object="${recipe}" >
+<form th:action="@{/addRecipes}" method="post" th:object="${recipe}">
     Name:<input type="text" name="recipeName"></br>
     Preparation:<input type="text" name="preparation"></br>
     Preparation time:<input type="number" name="preparationTime"></br>
@@ -20,22 +21,24 @@
 
     Cusine:</br>
 
-        <select th:field="*{cusine.id}" class="form-control">
-            <option th:each="cusine: ${cusines}" th:value="${cusine.id}" th:text="${cusine.name}"></option>
-        </select>
+    <select th:field="*{cusine.id}" class="form-control">
+        <option th:each="cusine: ${cusines}" th:value="${cusine.id}" th:text="${cusine.name}"></option>
+    </select>
     </br>
     Ingredients:<br/>
     <table>
         <tr>
-                <th:block th:each="ingredient : ${ingredients}" th:field="*{ingredients.id}">
-                    <input type="checkbox" th:value="${ingredient.id}" th:name="ingredients"/>
-                    <label th:text="${ingredient.ingredientName}"></label>
-                </th:block>
-                    </tr>
+            <th:block th:each="ingredient : ${ingredients}" th:field="*{ingredients.id}">
+                <input type="checkbox" th:value="${ingredient.id}" th:name="ingredients"/>
+                <label th:text="${ingredient.ingredientName}"></label>
+            </th:block>
+        </tr>
     </table>
     </br>
     <input type="submit" value="Add Recipe"/>
 </form>
+
 <a th:href="@{recipes}">Back</a>
+
 </body>
 </html>

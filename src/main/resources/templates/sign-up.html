@@ -3,11 +3,12 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>sign-up</title>
     <link th:href="@{css/style.css}" href="../../static/css/Style.css"
           rel="stylesheet" type="text/css" media="screen"/>
 </head>
 <body>
+
 <h1>Register</h1>
 <div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
 <div class="alert alert-primary" role="alert" th:text="${success}" th:if="${success}"></div>
@@ -21,6 +22,8 @@
 
     <input type="submit" value="sign up!">
 </form>
+
 <a href="/index">Home Page:</a><br/>
+
 </body>
 </html>

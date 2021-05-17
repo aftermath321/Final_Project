@@ -24,36 +24,41 @@ public class UserController {
     public String hello(Principal principal, Model model) {
         User user = userService.findByUsername(principal.getName()).orElseThrow(RuntimeException::new);
         model.addAttribute("user", user);
-        Collection<? extends GrantedAuthority> authorities =  SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+        Collection<? extends GrantedAuthority> authorities =
+                SecurityContextHolder.getContext().getAuthentication().getAuthorities();
         model.addAttribute("authorities", authorities);
         return "hello";
+
     }
 
     @GetMapping("/index")
     public String homePage() {
         return "index";
+
     }
 
     @GetMapping("/edit")
-    public String getEdit(Principal principal, Model model){
+    public String getEdit(Principal principal, Model model) {
         User user = userService.findByUsername(principal.getName()).orElseThrow(RuntimeException::new);
         model.addAttribute("user", user);
         return "user-details";
+
     }
 
     @PostMapping("/edit")
-    public String submitEdit(@ModelAttribute User user, Model model, RedirectAttributes redirAttrs){
+    public String submitEdit(@ModelAttribute User user, Model model, RedirectAttributes redirAttrs) {
         model.addAttribute("user", user);
         userService.updateUser(user);
         redirAttrs.addFlashAttribute("okay", "Details changed!");
         return "redirect:/logout";
-//      Zabezpiecz przed already in use!!!
+
     }
 
     @GetMapping("/sign-up")
     public String signup(Model model) {
         model.addAttribute("user", new User());
         return "sign-up";
+
     }
 
 
@@ -68,15 +73,18 @@ public class UserController {
             redirAttrs.addFlashAttribute("error", "Username or E-mail already in use!");
             return "redirect:/sign-up";
         }
+
     }
 
     @GetMapping("/token")
-    public String signup (@RequestParam String value){
+    public String signup(@RequestParam String value) {
         Token byValue = userService.findToken(value);
         User user = byValue.getUser();
         user.setEnabled(true);
         userService.simpleSave(user);
         return "index";
+
     }
+
 }
 

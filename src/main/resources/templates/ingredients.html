@@ -2,11 +2,12 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>ingredients</title>
     <link th:href="@{css/style.css}" href="../../static/css/Style.css"
           rel="stylesheet" type="text/css" media="screen"/>
 </head>
 <body>
+
 <h1>Składniki</h1>
 
 <table class="tg">
@@ -21,6 +22,7 @@
         <td th:text="${ingredient.kcal}"/>
     </tr>
 </table>
+
 <a th:href="@{index}">Back</a>
 <a th:href="@{addIngredient}">Add Ingredient</a>
 
