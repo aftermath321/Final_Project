@@ -5,5 +5,10 @@ The general idea is having an website with Users and admins, who can create reci
 I might include diet table for each recipe and plan. I also plan to include searching for a recipe basing on what users type in the search field (e.g. user types he has eggs, butter
 and bread, so the website will automatically seach for recipes he can do with these ingredients).
 
-So far:
--User crud - Spring security (still in development)
+This project uses:
+-Java
+-Spring Boot
+-Spring Hiberante
+-Spring Security
+-Thymeleaf
+-HTML
